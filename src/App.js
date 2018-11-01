@@ -1,30 +1,36 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import styles from './App.css';
 import Button from '@material-ui/core/Button';
+import { Element, scroller } from 'react-scroll'
 
 class App extends Component {
-  rowsContent = { Experience: null, Education: null, Projects: null, Skills: null, Awards: null };
+  rowsContent = [ "Experience", "Education", "Projects", "Skills", "Awards" ];
 
-  scrollToDomRef = (val) => {
-    const myDomNode = ReactDOM.findDOMNode(this.rowsContent[val])
-    window.scrollTo(0, myDomNode.offsetTop - 64)
+  scrollTo(val) {
+    scroller.scrollTo(val, {
+      duration: 800,
+      delay: 0,
+      smooth: 'easeInOutQuart',
+      offset: -64,
+    })
   }
 
   render() {
-    const rows = Object.keys(this.rowsContent).map((value, index) =>
-      <Grid key={value} container className={styles.rowContent} ref={r => { this.rowsContent[value] = r }}>
-        <Grid item xs style={{ backgroundColor: index % 2 === 0 ? "#303030" : "#F0F0F0" }}>
-          haut gauche
+    const rows = this.rowsContent.map((value, index) =>
+      <Element name={value} >
+        <Grid key={value} container className={styles.rowContent}>
+          <Grid item xs style={{ backgroundColor: index % 2 === 0 ? "#303030" : "#F0F0F0" }}>
+            haut gauche
         </Grid>
-        <Grid item xs style={{ backgroundColor: index % 2 === 0 ? "#F0F0F0" : "#303030" }}>
-          haut droit
+          <Grid item xs style={{ backgroundColor: index % 2 === 0 ? "#F0F0F0" : "#303030" }}>
+            haut droit
         </Grid>
-      </Grid>
+        </Grid>
+      </Element>
     );
     return (
       <div>
@@ -33,8 +39,8 @@ class App extends Component {
             <Typography variant="title" >
               Myself
             </Typography>
-            {Object.keys(this.rowsContent).map((value) =>
-              <Button onClick={() => this.scrollToDomRef(value)}>{value}</Button>
+            {this.rowsContent.map((value) =>
+              <Button to={{ value }} onClick={() => this.scrollTo(value)}>{value}</Button>
             )}
           </Toolbar>
         </AppBar>

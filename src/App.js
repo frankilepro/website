@@ -7,6 +7,17 @@ import styles from './App.css';
 
 class App extends Component {
   render() {
+    const numberOfRows = Array.from(Array(10).keys());
+    const rows = numberOfRows.map((index) =>
+      <Grid container className={styles.rowContent}>
+        <Grid item xs style={{ backgroundColor: index % 2 === 0 ? "#303030" : "#F0F0F0" }}>
+          haut gauche
+        </Grid>
+        <Grid item xs style={{ backgroundColor: index % 2 === 0 ? "#F0F0F0" : "#303030" }}>
+          haut droit
+        </Grid>
+      </Grid>
+    );
     return (
       <div>
         <AppBar position="fixed">
@@ -16,22 +27,9 @@ class App extends Component {
             </Typography>
           </Toolbar>
         </AppBar>
-        <Grid container className={styles.appLayout}>
-          <Grid item xs style={{ backgroundColor: "blue" }}>
-            haut gauche
-          </Grid>
-          <Grid item xs style={{ backgroundColor: "red" }}>
-            haut droit
-          </Grid>
-        </Grid>
-        <Grid container style={{ height: "calc(100vh - 64px)" }}>
-          <Grid item xs style={{ backgroundColor: "red" }}>
-            bas gauche
-          </Grid>
-          <Grid item xs style={{ backgroundColor: "blue" }}>
-            bas droite
-          </Grid>
-        </Grid>
+        <div className={styles.appLayout}>
+          {rows}
+        </div>
       </div>
     );
   }

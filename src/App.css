@@ -1,4 +1,7 @@
 .appLayout {
     margin-top: 64px;
+}
+
+.rowContent {
     height: calc(100vh - 64px)
 }

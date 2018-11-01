@@ -16,7 +16,7 @@ class App extends Component {
             </Typography>
           </Toolbar>
         </AppBar>
-        <Grid container style={{ marginTop: "64px", height: "calc(100vh - 64px)" }}>
+        <Grid container className={styles.appLayout}>
           <Grid item xs style={{ backgroundColor: "blue" }}>
             haut gauche
           </Grid>

@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 import { Element, scroller } from 'react-scroll'
 
 class App extends Component {
-  rowsContent = [ "Experience", "Education", "Projects", "Skills", "Awards" ];
+  rowsContent = ["Experience", "Education", "Projects", "Skills", "Awards"];
 
   scrollTo(val) {
     scroller.scrollTo(val, {
@@ -24,11 +24,11 @@ class App extends Component {
       <Element name={value} >
         <Grid key={value} container className={styles.rowContent}>
           <Grid item xs style={{ backgroundColor: index % 2 === 0 ? "#303030" : "#F0F0F0" }}>
-            haut gauche
-        </Grid>
+            {value}
+          </Grid>
           <Grid item xs style={{ backgroundColor: index % 2 === 0 ? "#F0F0F0" : "#303030" }}>
-            haut droit
-        </Grid>
+            {value}
+          </Grid>
         </Grid>
       </Element>
     );

@@ -1,7 +1,11 @@
 .appLayout {
-    margin-top: 64px;
+    margin-top: 69px;
 }
 
 .rowContent {
-    height: calc(100vh - 64px)
+    height: calc(100vh - 69px)
+}
+
+.mainButton {
+    padding-right: 10px;
 }

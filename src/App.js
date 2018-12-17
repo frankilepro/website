@@ -5,24 +5,38 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import styles from './App.css';
 import Button from '@material-ui/core/Button';
-import { Element, scroller } from 'react-scroll'
+import { Element, scroller } from 'react-scroll';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import { observer } from "mobx-react";
+import { observable } from "mobx";
 
+@observer
 class App extends Component {
+  @observable currentHeight = 0;
   rowsContent = ["Experience", "Education", "Projects", "Skills", "Awards"];
 
+  componentDidMount = () => {
+    window.addEventListener("scroll", () => {
+      const midPoint = document.documentElement.scrollTop + window.outerHeight / 2;
+      const percentage = midPoint / document.documentElement.scrollHeight;
+      this.currentHeight = Math.floor(percentage * (this.rowsContent.length + 1)) / this.rowsContent.length * 100;
+    });
+  }
+
   scrollTo(val) {
+    console.log(val);
     scroller.scrollTo(val, {
       duration: 800,
       delay: 0,
       smooth: 'easeInOutQuart',
-      offset: -64,
+      offset: -69,
     })
   }
 
   render() {
     const rows = this.rowsContent.map((value, index) =>
-      <Element name={value} >
-        <Grid key={value} container className={styles.rowContent}>
+      <Element key={value} name={value} >
+        <Grid container className={styles.rowContent}>
           <Grid item xs style={{ backgroundColor: index % 2 === 0 ? "#303030" : "#F0F0F0" }}>
             {value}
           </Grid>
@@ -36,13 +50,14 @@ class App extends Component {
       <div>
         <AppBar position="fixed">
           <Toolbar>
-            <Typography variant="title" >
+            <Typography variant="title" className={styles.mainButton}>
               Myself
             </Typography>
             {this.rowsContent.map((value) =>
-              <Button to={{ value }} onClick={() => this.scrollTo(value)}>{value}</Button>
+              <Button key={value} to={{ value }} onClick={() => this.scrollTo(value)}>{value}</Button>
             )}
           </Toolbar>
+          <LinearProgress color="secondary" variant="determinate" value={this.currentHeight} />
         </AppBar>
         <div className={styles.appLayout}>
           {rows}

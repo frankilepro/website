@@ -2,18 +2,28 @@ import React, { Component } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
 import styles from './App.css';
 import Button from '@material-ui/core/Button';
 import { Element, scroller } from 'react-scroll';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { observer } from "mobx-react";
 import { observable } from "mobx";
+import Awards from './components/Awards';
+import Education from './components/Education';
+import Experience from './components/Experience';
+import Projects from './components/Projects';
+import Skills from './components/Skills';
 
 @observer
 class App extends Component {
   @observable currentHeight = 0;
-  rowsContent = ["Experience", "Education", "Projects", "Skills", "Awards"];
+  rowsContent = [
+    { name: "Experience", component: <Experience /> },
+    { name: "Education", component: <Education /> },
+    { name: "Projects", component: <Projects /> },
+    { name: "Skills", component: <Skills /> },
+    { name: "Awards", component: <Awards /> }
+  ];
 
   componentDidMount = () => {
     window.addEventListener("scroll", () => {
@@ -24,7 +34,6 @@ class App extends Component {
   }
 
   scrollTo(val) {
-    console.log(val);
     scroller.scrollTo(val, {
       duration: 800,
       delay: 0,
@@ -34,16 +43,9 @@ class App extends Component {
   }
 
   render() {
-    const rows = this.rowsContent.map((value, index) =>
-      <Element key={value} name={value} >
-        <Grid container className={styles.rowContent}>
-          <Grid item xs style={{ backgroundColor: index % 2 === 0 ? "#303030" : "#F0F0F0" }}>
-            {value}
-          </Grid>
-          <Grid item xs style={{ backgroundColor: index % 2 === 0 ? "#F0F0F0" : "#303030" }}>
-            {value}
-          </Grid>
-        </Grid>
+    const rows = this.rowsContent.map((value) =>
+      <Element key={value.name} name={value.name} className={styles.rowContent}>
+        {value.component}
       </Element>
     );
     return (
@@ -54,13 +56,22 @@ class App extends Component {
               Myself
             </Typography>
             {this.rowsContent.map((value) =>
-              <Button key={value} to={{ value }} onClick={() => this.scrollTo(value)}>{value}</Button>
+              <Button key={value.name} to={{ value: value.name }}
+                onClick={() => this.scrollTo(value.name)}>
+                {value.name}
+              </Button>
             )}
           </Toolbar>
           <LinearProgress color="secondary" variant="determinate" value={this.currentHeight} />
         </AppBar>
         <div className={styles.appLayout}>
           {rows}
+          {/* <Element name="experience" >
+            <Experience />
+          </Element>
+          <Element name="experience" >
+            <Experience />
+          </Element> */}
         </div>
       </div>
     );

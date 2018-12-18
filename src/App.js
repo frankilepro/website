@@ -13,6 +13,9 @@ import Education from './components/Education';
 import Experience from './components/Experience';
 import Projects from './components/Projects';
 import Skills from './components/Skills';
+import IconButton from '@material-ui/core/IconButton';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import Tooltip from '@material-ui/core/Tooltip';
 
 @observer
 class App extends Component {
@@ -52,26 +55,32 @@ class App extends Component {
       <div>
         <AppBar position="fixed">
           <Toolbar>
-            <Typography variant="title" className={styles.mainButton}>
+            <div className={styles.mainHeader}>
               Myself
+            </div>
+            <Typography variant="title" className={styles.mainButtons}>
+              {this.rowsContent.map((value) =>
+                <Button key={value.name} to={{ value: value.name }}
+                  onClick={() => this.scrollTo(value.name)}>
+                  {value.name}
+                </Button>
+              )}
             </Typography>
-            {this.rowsContent.map((value) =>
-              <Button key={value.name} to={{ value: value.name }}
-                onClick={() => this.scrollTo(value.name)}>
-                {value.name}
-              </Button>
-            )}
+            <Tooltip title="GitHub" placement="bottom">
+              <IconButton onClick={() => window.open("https://github.com/frankilepro", "_blank")}>
+                <FaGithub />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="LinkedIn" placement="bottom">
+              <IconButton>
+                <FaLinkedin onClick={() => window.open("https://www.linkedin.com/in/francis-granger/", "_blank")} />
+              </IconButton>
+            </Tooltip>
           </Toolbar>
           <LinearProgress color="secondary" variant="determinate" value={this.currentHeight} />
         </AppBar>
         <div className={styles.appLayout}>
           {rows}
-          {/* <Element name="experience" >
-            <Experience />
-          </Element>
-          <Element name="experience" >
-            <Experience />
-          </Element> */}
         </div>
       </div>
     );

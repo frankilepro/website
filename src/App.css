@@ -6,6 +6,12 @@
     height: calc(100vh - 69px)
 }
 
-.mainButton {
+.mainHeader {
+    font-size: 20px;
+    font-weight: 1000;
     padding-right: 10px;
+}
+
+.mainButtons {
+    flex-grow: 1;
 }

@@ -16,6 +16,7 @@ import Skills from './components/Skills';
 import IconButton from '@material-ui/core/IconButton';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import Tooltip from '@material-ui/core/Tooltip';
+import { URLs } from './URLs';
 
 @observer
 class App extends Component {
@@ -67,13 +68,13 @@ class App extends Component {
               )}
             </Typography>
             <Tooltip title="GitHub" placement="bottom">
-              <IconButton onClick={() => window.open("https://github.com/frankilepro", "_blank")}>
+              <IconButton onClick={() => window.open(URLs.linkedin, "_blank")}>
                 <FaGithub />
               </IconButton>
             </Tooltip>
             <Tooltip title="LinkedIn" placement="bottom">
               <IconButton>
-                <FaLinkedin onClick={() => window.open("https://www.linkedin.com/in/francis-granger/", "_blank")} />
+                <FaLinkedin onClick={() => window.open(URLs.github, "_blank")} />
               </IconButton>
             </Tooltip>
           </Toolbar>

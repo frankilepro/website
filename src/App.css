@@ -1,9 +1,13 @@
+body {
+    overflow-x: hidden;
+}
+
 .appLayout {
     margin-top: 69px;
 }
 
 .rowContent {
-    height: calc(100vh - 69px)
+    min-height: calc(100vh - 69px)
 }
 
 .mainHeader {

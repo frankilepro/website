@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
@@ -28,36 +27,35 @@ class CustomCard extends Component {
       <Card style={{ width, margin: 10 }}>
         <CardHeader
           avatar={<img alt="Microsoft" style={{ width: 40, height: 40 }} src={URLs.microsoftLogo} />}
-          title={<>Microsoft<br/>Software Engineering Intern</>}
-          subheader={<>Vancouver, Canada<br/>May to August 2018</>}
+          title={this.props.header}
+          subheader={this.props.subheader}
         />
-        <CardMedia
-          style={{ paddingTop: "56.25%" }}
-          image="https://c.s-microsoft.com/en-us/CMSImages/Microsoft-logo_rgb_wht.jpg?version=256EB2C3-1E17-2967-746F-3F32234EF429"
-          title="Paella dish"
-        />
+        {this.props.cardBody}
         <CardContent>
           <Typography component="p">
-            This impressive paella is a perfect party dish and a fun meal to cook together with your
-            guests. Add 1 cup of frozen peas along with the mussels, if you like.
+            {this.props.bodySummary}
           </Typography>
         </CardContent>
-        <CardActions disableActionSpacing>
-          <IconButton
-            className={classnames(styles.expand, {
-              [styles.expandOpen]: this.expanded,
-            })}
-            onClick={this.handleExpandClick}>
-            <ExpandMoreIcon />
-          </IconButton>
-        </CardActions>
-        <Collapse in={this.expanded} timeout="auto" unmountOnExit>
-          <CardContent>
-            <Typography>
-              Set aside off of the heat to let rest for 10 minutes, and then serve.
-            </Typography>
-          </CardContent>
-        </Collapse>
+        {this.props.bodyExtended &&
+          <>
+            <CardActions disableActionSpacing>
+              <IconButton
+                className={classnames(styles.expand, {
+                  [styles.expandOpen]: this.expanded,
+                })}
+                onClick={this.handleExpandClick}>
+                <ExpandMoreIcon />
+              </IconButton>
+            </CardActions>
+            <Collapse in={this.expanded} timeout="auto" unmountOnExit>
+              <CardContent>
+                <Typography>
+                  {this.props.bodyExtended}
+                </Typography>
+              </CardContent>
+            </Collapse>
+          </>
+        }
       </Card>
     );
   }

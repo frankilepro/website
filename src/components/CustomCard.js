@@ -4,7 +4,6 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { URLs } from '../URLs';
 import { observer } from "mobx-react";
 import { observable } from "mobx";
 import CardActions from '@material-ui/core/CardActions';
@@ -26,7 +25,7 @@ class CustomCard extends Component {
     return (
       <Card style={{ width, margin: 10 }}>
         <CardHeader
-          avatar={<img alt="Microsoft" style={{ width: 40, height: 40 }} src={URLs.microsoftLogo} />}
+          avatar={this.props.avatar && <img alt="Microsoft" style={{ width: 40, height: 40 }} src={this.props.avatar} />}
           title={this.props.header}
           subheader={this.props.subheader}
         />

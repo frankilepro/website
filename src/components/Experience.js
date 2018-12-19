@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import CustomCard from './CustomCard';
 import Grid from '@material-ui/core/Grid';
 import CardMedia from '@material-ui/core/CardMedia';
+import { URLs } from '../URLs';
 
 class Experience extends Component {
   render() {
     return (
       <Grid container justify="center">
         <CustomCard
+          avatar={URLs.microsoftLogo}
           header={<>Microsoft<br />Software Engineering Intern</>}
           subheader={<>Vancouver, Canada<br />May to August 2018</>}
           cardBody={

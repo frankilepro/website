@@ -6,9 +6,9 @@ class Experience extends Component {
   render() {
     return (
       <Grid container justify="center">
-        <CustomCard width={window.innerWidth / 2}/>
         <CustomCard/>
-        <CustomCard width={window.innerWidth}/>
+        <CustomCard/>
+        <CustomCard/>
       </Grid>
     );
   }

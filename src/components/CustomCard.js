@@ -23,14 +23,13 @@ class CustomCard extends Component {
   };
 
   render() {
-    const width = this.props.width ? this.props.width : window.innerWidth / 3.5;
-    console.log(width);
+    const width = this.props.width ? this.props.width : window.innerWidth / 3.2;
     return (
-      <Card style={{ width, margin: 20 }}>
+      <Card style={{ width, margin: 10 }}>
         <CardHeader
           avatar={<img alt="Microsoft" style={{ width: 40, height: 40 }} src={URLs.microsoftLogo} />}
-          title="Shrimp and Chorizo Paella"
-          subheader="September 14, 2016"
+          title={<>Microsoft<br/>Software Engineering Intern</>}
+          subheader={<>Vancouver, Canada<br/>May to August 2018</>}
         />
         <CardMedia
           style={{ paddingTop: "56.25%" }}
